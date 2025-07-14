@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -5,57 +6,1392 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BNG Agency - For The Mind By Heart</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; line-height: 1.6; }
-        nav { background: #fff; padding: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .logo { font-size: 1.5rem; font-weight: bold; }
-        .hero { padding: 4rem 2rem; text-align: center; background: #f8f9fa; }
-        .hero h1 { font-size: 3rem; margin-bottom: 1rem; }
-        .hero span { color: #007bff; }
-        .hero p { font-size: 1.2rem; margin-bottom: 2rem; color: #666; }
-        .btn { display: inline-block; padding: 12px 24px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; margin: 0 10px; }
-        .stats { background: #000; color: white; padding: 3rem 2rem; text-align: center; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-        .stat h3 { font-size: 2.5rem; color: #007bff; }
-        footer { background: #000; color: white; padding: 2rem; text-align: center; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .logo-text h1 {
+            font-size: 1.2rem;
+            font-weight: 900;
+        }
+
+        .logo-text span {
+            color: #007bff;
+        }
+
+        .logo-text p {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #007bff;
+        }
+
+        /* Mobile menu */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .mobile-toggle span {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            transition: 0.3s;
+        }
+
+        /* Page sections */
+        .page {
+            display: none;
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-text span {
+            color: #007bff;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            color: #666;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: #666;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid #007bff;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: #007bff;
+        }
+
+        .btn-outline:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .service-card {
+            aspect-ratio: 1;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .service-card:nth-child(1) {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+
+        .service-card:nth-child(2) {
+            background: linear-gradient(135deg, #007bff, #4d94ff);
+        }
+
+        .service-card:nth-child(3) {
+            background: linear-gradient(135deg, #8e24aa, #5e35b1);
+        }
+
+        .service-card:nth-child(4) {
+            background: linear-gradient(135deg, #00c853, #64dd17);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #000;
+            color: white;
+            padding: 4rem 2rem;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #007bff;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Mission Section */
+        .mission {
+            padding: 4rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .mission-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .value-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        /* Services Page */
+        .services-page {
+            padding: 2rem;
+        }
+
+        .service-detail {
+            background: white;
+            margin-bottom: 3rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .service-header {
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+        }
+
+        .service-header.brand {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+
+        .service-header.marketing {
+            background: linear-gradient(135deg, #007bff, #4d94ff);
+        }
+
+        .service-header.events {
+            background: linear-gradient(135deg, #8e24aa, #5e35b1);
+        }
+
+        .service-header.ecommerce {
+            background: linear-gradient(135deg, #00c853, #64dd17);
+        }
+
+        .service-name {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .service-tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .service-body {
+            padding: 3rem 2rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .service-features li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            border-bottom: 1px solid #eee;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .example-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .example-link {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .example-link:hover {
+            background: #000;
+            transform: translateY(-1px);
+        }
+
+        /* Portfolio Page */
+        .portfolio-filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            background: #f8f9fa;
+            border: 2px solid #f8f9fa;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .portfolio-image {
+            width: 100%;
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .portfolio-image.brand {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+
+        .portfolio-image.marketing {
+            background: linear-gradient(135deg, #007bff, #4d94ff);
+        }
+
+        .portfolio-image.events {
+            background: linear-gradient(135deg, #8e24aa, #5e35b1);
+        }
+
+        .portfolio-image.web {
+            background: linear-gradient(135deg, #00c853, #64dd17);
+        }
+
+        .portfolio-content {
+            padding: 1.5rem;
+        }
+
+        .portfolio-category {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #007bff;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+        }
+
+        .portfolio-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .portfolio-link:hover {
+            background: #000;
+        }
+
+        /* Contact Page */
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: #007bff;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #007bff;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text h4 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .contact-text p {
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-text a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .form-header h3 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: #007bff;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            background: #000;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #000;
+            color: white;
+            padding: 3rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand span {
+            color: #007bff;
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: #007bff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #007bff;
+        }
+
+        .footer-column h4 {
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: #007bff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: left 0.3s;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                padding: 2rem 0;
+                gap: 1rem;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .portfolio-filters {
+                overflow-x: auto;
+                justify-content: flex-start;
+                padding-bottom: 1rem;
+            }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav>
-        <div class="logo">BNG <span style="color: #007bff;">AGENCY</span></div>
-    </nav>
-
-    <section class="hero">
-        <h1>BNG <span>AGENCY</span></h1>
-        <p>For The Mind By Heart</p>
-        <p>Un'agenzia creativa full-service che affianca brand e aziende nel rafforzare la propria presenza mediatica.</p>
-        <a href="#" class="btn">SCOPRI I SERVIZI</a>
-        <a href="#" class="btn" style="background: transparent; color: #007bff; border: 2px solid #007bff;">VEDI PORTFOLIO</a>
-    </section>
-
-    <section class="stats">
-        <div class="stats-grid">
-            <div class="stat">
-                <h3>+97</h3>
-                <p>Eventi Organizzati</p>
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">
+                <div class="logo-icon">B</div>
+                <div class="logo-text">
+                    <h1>BNG <span>AGENCY</span></h1>
+                    <p>FOR THE MIND BY HEART</p>
+                </div>
             </div>
-            <div class="stat">
-                <h3>+47</h3>
-                <p>Brand Activation</p>
-            </div>
-            <div class="stat">
-                <h3>+22</h3>
-                <p>Siti Web Realizzati</p>
-            </div>
-            <div class="stat">
-                <h3>+39</h3>
-                <p>Marketing Strategies</p>
+            <ul class="nav-menu" id="navMenu">
+                <li><a onclick="showPage('home')" class="nav-link active">HOME</a></li>
+                <li><a onclick="showPage('servizi')" class="nav-link">SERVIZI</a></li>
+                <li><a onclick="showPage('portfolio')" class="nav-link">PORTFOLIO</a></li>
+                <li><a onclick="showPage('contatti')" class="nav-link">CONTATTI</a></li>
+            </ul>
+            <div class="mobile-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-    </section>
+    </nav>
 
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>BNG <span>AGENCY</span></h1>
+                    <p class="hero-subtitle">For The Mind By Heart</p>
+                    <p class="hero-description">
+                        Un'agenzia creativa full-service che affianca brand e aziende nel rafforzare la propria presenza mediatica. 
+                        Specializzata in attivazioni social con influencer, sviluppa soluzioni personalizzate per aumentare la visibilità online.
+                    </p>
+                    <div class="cta-buttons">
+                        <a class="btn" onclick="showPage('servizi')">SCOPRI I SERVIZI</a>
+                        <a class="btn btn-outline" onclick="showPage('portfolio')">VEDI PORTFOLIO</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="services-grid">
+                        <div class="service-card" onclick="window.open('https://www.instagram.com/reel/DDo_aFDNjIR/?hl=it', '_blank')">
+                            <div class="service-icon">🎯</div>
+                            <div class="service-title">Brand Activation</div>
+                        </div>
+                        <div class="service-card" onclick="window.open('https://www.instagram.com/p/DAOTO_oNTLx/?hl=it', '_blank')">
+                            <div class="service-icon">📈</div>
+                            <div class="service-title">Marketing</div>
+                        </div>
+                        <div class="service-card" onclick="window.open('https://www.instagram.com/reel/CtGd2FUgkR5/?hl=it', '_blank')">
+                            <div class="service-icon">🎪</div>
+                            <div class="service-title">Eventi</div>
+                        </div>
+                        <div class="service-card" onclick="window.open('https://www.caffe.design/', '_blank')">
+                            <div class="service-icon">💻</div>
+                            <div class="service-title">E-commerce</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">+97</div>
+                    <div class="stat-label">Eventi Organizzati</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+47</div>
+                    <div class="stat-label">Brand Activation</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+22</div>
+                    <div class="stat-label">Siti Web Realizzati</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">+39</div>
+                    <div class="stat-label">Marketing Strategies</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section class="mission">
+            <div class="mission-container">
+                <h2 class="section-title">LA NOSTRA MISSION</h2>
+                <p class="section-description">
+                    La missione di BNG Agency è supportare le aziende nel raggiungimento dei propri obiettivi strategici 
+                    attraverso strategie digitali su misura, attivazioni social, talent management e produzioni creative. 
+                    Crediamo in una comunicazione autentica e ad alto impatto, capace di generare valore concreto.
+                </p>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">🧠</div>
+                        <h3 class="value-title">Salute Mentale</h3>
+                        <p class="value-description">
+                            Promuoviamo la salute mentale come elemento centrale del nostro approccio, 
+                            offrendo intrattenimento di qualità e collaborazioni con partner selezionati.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">🌱</div>
+                        <h3 class="value-title">Territorio</h3>
+                        <p class="value-description">
+                            Valorizziamo il territorio attraverso sinergie con realtà locali e 
+                            innoviamo costantemente nel settore degli eventi.
+                        </p>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon">♻️</div>
+                        <h3 class="value-title">Sostenibilità</h3>
+                        <p class="value-description">
+                            Operiamo nel pieno rispetto dell'ambiente e dei principi ESG, 
+                            promuovendo pratiche sostenibili in ogni nostro progetto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVIZI PAGE -->
+    <div id="servizi" class="page">
+        <section class="hero">
+            <div class="mission-container">
+                <h1 class="section-title">I NOSTRI SERVIZI</h1>
+                <p class="section-description">Soluzioni complete e personalizzate per rafforzare la presenza mediatica del tuo brand</p>
+            </div>
+        </section>
+
+        <div class="services-page">
+            <!-- Brand Activation -->
+            <div class="service-detail">
+                <div class="service-header brand">
+                    <h2 class="service-name">Brand Activation</h2>
+                    <p class="service-tagline">Creiamo attivazioni social su misura per aumentare visibilità e coinvolgimento</p>
+                </div>
+                <div class="service-body">
+                    <h3>Cosa facciamo:</h3>
+                    <ul class="service-features">
+                        <li>Strategie social ad alto impatto per amplificare la visibilità</li>
+                        <li>Selezione mirata di influencer e content creator</li>
+                        <li>Creazione di contenuti autentici e ingaggianti</li>
+                        <li>Focus su visibilità, credibilità e connessione emotiva</li>
+                        <li>Campagne personalizzate per ogni target</li>
+                    </ul>
+                    <h4>Alcuni esempi:</h4>
+                    <div class="example-links">
+                        <a href="https://www.instagram.com/reel/DITd0PbtES9/" target="_blank" class="example-link">Campagna Influencer #1</a>
+                        <a href="https://www.instagram.com/p/DIokrLDKZb8/" target="_blank" class="example-link">Content Creation #2</a>
+                        <a href="https://www.instagram.com/p/DH6D_uRNulw/" target="_blank" class="example-link">Brand Partnership #3</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marketing Strategies -->
+            <div class="service-detail">
+                <div class="service-header marketing">
+                    <h2 class="service-name">Marketing Strategies</h2>
+                    <p class="service-tagline">Sviluppiamo strategie su misura per ottenere risultati concreti e misurabili</p>
+                </div>
+                <div class="service-body">
+                    <h3>Il nostro approccio:</h3>
+                    <ul class="service-features">
+                        <li>Approccio integrato: analisi dati + creatività</li>
+                        <li>Gestione professionale dei canali social</li>
+                        <li>Pianificazione di campagne omnicanale</li>
+                        <li>Definizione del posizionamento e del target</li>
+                        <li>Azioni mirate per rafforzare identità e visibilità del brand</li>
+                    </ul>
+                    <h4>Case studies:</h4>
+                    <div class="example-links">
+                        <a href="https://www.instagram.com/p/DAOTO_oNTLx/?hl=it" target="_blank" class="example-link">Strategia Digitale Completa</a>
+                        <a href="https://www.instagram.com/valentinaclerici/?hl=it" target="_blank" class="example-link">Gestione Social Media</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Production -->
+            <div class="service-detail">
+                <div class="service-header events">
+                    <h2 class="service-name">Event Production</h2>
+                    <p class="service-tagline">Trasformiamo ogni evento in un'esperienza memorabile, curata in ogni dettaglio</p>
+                </div>
+                <div class="service-body">
+                    <h3>Cosa organizziamo:</h3>
+                    <ul class="service-features">
+                        <li>Festival, eventi aziendali e feste private</li>
+                        <li>Audio/luci, DJ set, catering, allestimenti</li>
+                        <li>Regia creativa e attenzione ai dettagli</li>
+                        <li>Collaborazione con partner selezionati</li>
+                        <li>Focus su innovazione e impatto emotivo</li>
+                    </ul>
+                    <h4>Eventi realizzati:</h4>
+                    <div class="example-links">
+                        <a href="https://www.instagram.com/reel/CtGd2FUgkR5/?hl=it" target="_blank" class="example-link">Festival Musicale</a>
+                        <a href="https://www.instagram.com/p/DLC8VWctIu7/" target="_blank" class="example-link">Evento Corporate</a>
+                        <a href="https://www.instagram.com/p/DAJ-MVqN-HL/" target="_blank" class="example-link">Festa Privata</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-commerce Development -->
+            <div class="service-detail">
+                <div class="service-header ecommerce">
+                    <h2 class="service-name">Sviluppo E-commerce</h2>
+                    <p class="service-tagline">Soluzioni digitali su misura per accelerare la crescita online delle aziende</p>
+                </div>
+                <div class="service-body">
+                    <h3>Cosa realizziamo:</h3>
+                    <ul class="service-features">
+                        <li>Design intuitivo e performance tecniche ottimizzate</li>
+                        <li>Strategie mirate alla conversione e alla crescita online</li>
+                        <li>Focus sull'esperienza utente e sugli obiettivi di business</li>
+                        <li>Dal sito vetrina allo shop online completo</li>
+                        <li>Studio fotografico professionale incluso</li>
+                    </ul>
+                    <h4>Progetti realizzati:</h4>
+                    <div class="example-links">
+                        <a href="https://www.caffe.design/" target="_blank" class="example-link">Caffe Design - E-commerce</a>
+                        <a href="https://gigaciao.com/" target="_blank" class="example-link">Gigaciao - Marketplace</a>
+                        <a href="https://cophouse.com/" target="_blank" class="example-link">Cophouse - Website</a>
+                        <a href="https://www.milanodascrocco.com/" target="_blank" class="example-link">Milano da Scrocco</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PORTFOLIO PAGE -->
+    <div id="portfolio" class="page">
+        <section class="hero">
+            <div class="mission-container">
+                <h1 class="section-title">IL NOSTRO PORTFOLIO</h1>
+                <p class="section-description">Scopri i progetti che hanno portato risultati straordinari ai nostri clienti</p>
+            </div>
+        </section>
+
+        <div class="services-page">
+            <div class="portfolio-filters">
+                <button class="filter-btn active" onclick="filterPortfolio('all')">TUTTI</button>
+                <button class="filter-btn" onclick="filterPortfolio('brand')">BRAND ACTIVATION</button>
+                <button class="filter-btn" onclick="filterPortfolio('marketing')">MARKETING</button>
+                <button class="filter-btn" onclick="filterPortfolio('events')">EVENTI</button>
+                <button class="filter-btn" onclick="filterPortfolio('web')">E-COMMERCE</button>
+            </div>
+            
+            <div class="portfolio-grid">
+                <!-- Brand Activation Projects -->
+                <div class="portfolio-item" data-category="brand">
+                    <div class="portfolio-image brand">🎯</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Brand Activation</div>
+                        <h3 class="portfolio-title">Campagna Influencer - Valentina Clerici</h3>
+                        <p class="portfolio-description">Strategia social completa con content creator selezionati per massimizzare engagement e reach organico.</p>
+                        <a href="https://www.instagram.com/reel/DITd0PbtES9/" target="_blank" class="portfolio-link">GUARDA VIDEO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="brand">
+                    <div class="portfolio-image brand">🎯</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Brand Activation</div>
+                        <h3 class="portfolio-title">Content Creation Autentici</h3>
+                        <p class="portfolio-description">Produzione di contenuti ingaggianti che rafforzano l'identità del brand e la connessione emotiva.</p>
+                        <a href="https://www.instagram.com/p/DIokrLDKZb8/" target="_blank" class="portfolio-link">GUARDA VIDEO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="brand">
+                    <div class="portfolio-image brand">🎯</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Brand Activation</div>
+                        <h3 class="portfolio-title">Partnership Strategiche</h3>
+                        <p class="portfolio-description">Collaborazioni mirate con influencer per amplificare la visibilità e credibilità del brand.</p>
+                        <a href="https://www.instagram.com/p/DH6D_uRNulw/" target="_blank" class="portfolio-link">GUARDA VIDEO</a>
+                    </div>
+                </div>
+
+                <!-- Marketing Strategy Projects -->
+                <div class="portfolio-item" data-category="marketing">
+                    <div class="portfolio-image marketing">📈</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Marketing Strategy</div>
+                        <h3 class="portfolio-title">Strategia Digitale Completa</h3>
+                        <p class="portfolio-description">Approccio data-driven che unisce creatività e analisi per massimizzare ROI e conversioni.</p>
+                        <a href="https://www.instagram.com/p/DAOTO_oNTLx/?hl=it" target="_blank" class="portfolio-link">GUARDA CASO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="marketing">
+                    <div class="portfolio-image marketing">📱</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Marketing Strategy</div>
+                        <h3 class="portfolio-title">Gestione Social Media</h3>
+                        <p class="portfolio-description">Gestione professionale multicanale con contenuti personalizzati e strategia di engagement.</p>
+                        <a href="https://www.instagram.com/valentinaclerici/?hl=it" target="_blank" class="portfolio-link">VEDI PROFILO</a>
+                    </div>
+                </div>
+
+                <!-- Event Production Projects -->
+                <div class="portfolio-item" data-category="events">
+                    <div class="portfolio-image events">🎪</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Event Production</div>
+                        <h3 class="portfolio-title">Festival Musicale</h3>
+                        <p class="portfolio-description">Organizzazione completa di festival con regia audio/luci, gestione artisti e coordinamento logistico.</p>
+                        <a href="https://www.instagram.com/reel/CtGd2FUgkR5/?hl=it" target="_blank" class="portfolio-link">GUARDA VIDEO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="events">
+                    <div class="portfolio-image events">🎪</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Event Production</div>
+                        <h3 class="portfolio-title">Evento Corporate</h3>
+                        <p class="portfolio-description">Evento aziendale con allestimenti personalizzati, catering e intrattenimento su misura.</p>
+                        <a href="https://www.instagram.com/p/DLC8VWctIu7/" target="_blank" class="portfolio-link">GUARDA VIDEO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="events">
+                    <div class="portfolio-image events">🎪</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">Event Production</div>
+                        <h3 class="portfolio-title">Festa Privata</h3>
+                        <p class="portfolio-description">Organizzazione eventi privati con attenzione ai dettagli e esperienze memorabili.</p>
+                        <a href="https://www.instagram.com/p/DAJ-MVqN-HL/" target="_blank" class="portfolio-link">GUARDA VIDEO</a>
+                    </div>
+                </div>
+
+                <!-- E-commerce Projects -->
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-image web">💻</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">E-commerce</div>
+                        <h3 class="portfolio-title">Caffe Design</h3>
+                        <p class="portfolio-description">E-commerce completo con design intuitivo, ottimizzazione conversioni e fotografia prodotti.</p>
+                        <a href="https://www.caffe.design/" target="_blank" class="portfolio-link">VISITA SITO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-image web">💻</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">E-commerce</div>
+                        <h3 class="portfolio-title">Gigaciao Marketplace</h3>
+                        <p class="portfolio-description">Piattaforma marketplace con gestione multi-vendor e sistema di pagamenti integrato.</p>
+                        <a href="https://gigaciao.com/" target="_blank" class="portfolio-link">VISITA SITO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-image web">💻</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">E-commerce</div>
+                        <h3 class="portfolio-title">Cophouse Website</h3>
+                        <p class="portfolio-description">Sito corporate con design moderno e funzionalità avanzate per l'esperienza utente.</p>
+                        <a href="https://cophouse.com/" target="_blank" class="portfolio-link">VISITA SITO</a>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-category="web">
+                    <div class="portfolio-image web">🌐</div>
+                    <div class="portfolio-content">
+                        <div class="portfolio-category">E-commerce</div>
+                        <h3 class="portfolio-title">Milano da Scrocco</h3>
+                        <p class="portfolio-description">Piattaforma dedicata agli eventi e alle offerte di Milano con sistema di geolocalizzazione.</p>
+                        <a href="https://www.milanodascrocco.com/" target="_blank" class="portfolio-link">VISITA SITO</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTATTI PAGE -->
+    <div id="contatti" class="page">
+        <section class="hero">
+            <div class="mission-container">
+                <h1 class="section-title">CONTATTACI</h1>
+                <p class="section-description">Pronto a trasformare le tue idee in realtà? Parliamone insieme</p>
+            </div>
+        </section>
+
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Parliamone</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">📧</div>
+                    <div class="contact-text">
+                        <h4>Email</h4>
+                        <p>Scrivici per discutere il tuo progetto</p>
+                        <a href="mailto:info@bngagency.com">info@bngagency.com</a>
+                        <p><a href="mailto:boingparty@legalmail.it">boingparty@legalmail.it</a></p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <div class="contact-text">
+                        <h4>Telefono</h4>
+                        <p>Luciano Licchetta, Co-Founder & Co-CEO</p>
+                        <a href="tel:+393278774647">327 877 4647</a>
+                        <p>Pierandrea Melissano, Co-Founder & Co-CEO</p>
+                        <a href="tel:+393209029295">320 902 9295</a>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>Sede</h4>
+                        <p>Milano, Lombardia</p>
+                        <p>Italia</p>
+                        <p>P.IVA: 12555630966</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">🌐</div>
+                    <div class="contact-text">
+                        <h4>Social Media</h4>
+                        <p>Seguici sui nostri canali</p>
+                        <a href="https://www.instagram.com/bngagency/" target="_blank">@bngagency</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="form-header">
+                    <h3>Inizia il tuo progetto</h3>
+                    <p>Compila il form e ti ricontatteremo entro 24 ore</p>
+                </div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nome e Cognome</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Telefono</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Servizio di Interesse</label>
+                        <select id="service" name="service" required>
+                            <option value="">Seleziona un servizio</option>
+                            <option value="brand-activation">Brand Activation</option>
+                            <option value="marketing">Marketing Strategies</option>
+                            <option value="events">Event Production</option>
+                            <option value="ecommerce">E-commerce Development</option>
+                            <option value="altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Messaggio</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Raccontaci del tuo progetto..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Invia Messaggio</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 BNG Agency. For The Mind By Heart</p>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>BNG <span>AGENCY</span></h3>
+                <p>Un'agenzia creativa full-service che affianca brand e aziende nel rafforzare la propria presenza mediatica attraverso strategie digitali innovative e personalizzate.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/bngagency/" target="_blank" class="social-link">📷</a>
+                    <a href="mailto:info@bngagency.com" class="social-link">📧</a>
+                    <a href="tel:+393278774647" class="social-link">📞</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Servizi</h4>
+                <ul>
+                    <li><a onclick="showPage('servizi')">Brand Activation</a></li>
+                    <li><a onclick="showPage('servizi')">Marketing Strategies</a></li>
+                    <li><a onclick="showPage('servizi')">Event Production</a></li>
+                    <li><a onclick="showPage('servizi')">E-commerce Development</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Azienda</h4>
+                <ul>
+                    <li><a onclick="showPage('home')">Chi Siamo</a></li>
+                    <li><a onclick="showPage('portfolio')">Portfolio</a></li>
+                    <li><a onclick="showPage('contatti')">Contatti</a></li>
+                    <li><a href="mailto:info@bngagency.com">Carriere</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 BNG Agency. Tutti i diritti riservati. | For The Mind By Heart | P.IVA: 12555630966</p>
+        </div>
     </footer>
+
+    <script>
+        // Navigation
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update nav active state
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Close mobile menu
+            document.getElementById('navMenu').classList.remove('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Portfolio filter
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('.portfolio-item');
+            const filters = document.querySelectorAll('.filter-btn');
+            
+            // Update active filter
+            filters.forEach(filter => filter.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact form
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Grazie per averci contattato! Ti risponderemo presto.');
+                    this.reset();
+                });
+            }
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const nav = document.querySelector('nav');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (!nav.contains(event.target)) {
+                navMenu.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
